@@ -18,12 +18,8 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Baritone-Grade 3D Flight Engine with:
- * - Real-time ETA Action Bar Display (Toggleable)
- * - Active Chunk Ticket Keeping (prevents entities freezing in unloaded chunks)
- * - Long-Range Hierarchical 3D Pathfinding (10,000 node search depth)
- * - Sensory Obstacle Repulsion & Collision Slide Guard
- * - Stuck Detection, Escape Impulses & Teleport Rescue
+ * Flight engine handling courier movement, pathfinding waypoints,
+ * obstacle avoidance, chunk loading, and arrival detection.
  */
 public class FlightEngine extends BukkitRunnable {
 

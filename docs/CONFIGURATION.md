@@ -1,8 +1,6 @@
-# ⚙️ ParrotCouriers — Configuration Reference (`config.yml`)
+# ParrotCouriers Configuration Guide
 
----
-
-## 📄 Complete Annotated `config.yml`
+The plugin configuration is located in `plugins/ParrotCouriers/config.yml`.
 
 ```yaml
 # ================================================================= #
@@ -21,15 +19,15 @@ targeting:
 
 # Flight & Navigation
 flight:
-  # Base flight speed in blocks per tick (0.28 is ~5.6 blocks/sec - calm, relaxed & steady)
+  # Base flight speed in blocks per tick (0.28 is ~5.6 blocks/sec)
   speed: 0.28
-  # Speed boost multiplier when fed Sweet Berries during setup (1.85 = +85% speed boost with wind trails!)
+  # Speed boost multiplier when fed Sweet Berries during setup (1.85 = +85% speed)
   speed-boost-multiplier: 1.85
-  # Minimum cruising height above terrain blocks (avoids mountains/trees)
+  # Minimum cruising height above terrain blocks
   terrain-clearance: 6.0
   # Cruising altitude base level in open skies
   cruise-altitude: 85.0
-  # Deceleration factor when approaching landing (smoother glide)
+  # Deceleration factor when approaching landing
   approach-speed-factor: 0.55
 
   # Stuck Detection & Re-pathing
@@ -93,7 +91,7 @@ sounds:
   ambient-sound: "ENTITY_PARROT_AMBIENT"
   lock-sound: "ENTITY_PARROT_EAT"
 
-# Clean & Customizable Messages (MiniMessage format, solid colors)
+# Messages (MiniMessage format)
 messages:
   show-prefix: true
   prefix: "<gold>[ParrotCouriers]</gold> "

@@ -181,7 +181,6 @@ public class TradeGui implements InventoryHolder {
         ItemStack payload = courierData.getPayloadItem();
         if (payload != null) {
             giveItemToPlayer(recipient, payload);
-            // CRITICAL FIX: Clear payload from courier immediately to eliminate item dupe glitch!
             courierData.setPayloadItem(null);
         }
 
