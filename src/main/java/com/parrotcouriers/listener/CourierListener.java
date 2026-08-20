@@ -104,7 +104,7 @@ public class CourierListener implements Listener {
                     TextUtil.sendMessage(player, cfg.getMessage("registered-destination", "<gray>Destination (<yellow>%type%</yellow>): <gold>%target%</gold></gray>")
                             .replace("%type%", targetTypeDesc)
                             .replace("%target%", targetName));
-                    TextUtil.sendMessage(player, cfg.getMessage("step1-prompt", "<yellow><b>Step 1:</b> Right-click with your package to send (or sneak-click with berries/fruit/book for buffs).</yellow>"));
+                    TextUtil.sendMessage(player, cfg.getMessage("step1-msg", "<yellow><b>Step 1:</b> Right-click with your package to send (or sneak-click with berries/fruit/book for buffs).</yellow>"));
                     return;
                 }
             }
@@ -235,7 +235,7 @@ public class CourierListener implements Listener {
             TextUtil.sendMessage(player, cfg.getMessage("payload-loaded", "<green>✔ Package loaded: <gold>%item% x%amount%</gold>!</green>")
                     .replace("%item%", itemName)
                     .replace("%amount%", String.valueOf(payload.getAmount())));
-            TextUtil.sendMessage(player, cfg.getMessage("step2-prompt", "<yellow><b>Step 2:</b> Right-click with your payment item & quantity (or sneak-click empty hand for free delivery).</yellow>"));
+            TextUtil.sendMessage(player, cfg.getMessage("step2-msg", "<yellow><b>Step 2:</b> Right-click with your payment item & quantity (or sneak-click empty hand for free delivery).</yellow>"));
             return;
         }
 

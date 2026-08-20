@@ -95,8 +95,8 @@ messages:
 
   registered-title: "<green><b>Parrot Courier Registered!</b></green>"
   registered-destination: "<gray>Destination (<yellow>%type%</yellow>): <gold>%target%</gold></gray>"
-  step1-prompt: "<yellow><b>Step 1:</b> Right-click with your package to send (or sneak-click with berries/fruit/book for buffs).</yellow>"
-  step2-prompt: "<yellow><b>Step 2:</b> Right-click with your payment (or sneak-click empty hand for free gift).</yellow>"
+  step1-msg: "<yellow><b>Step 1:</b> Right-click with your package to send (or sneak-click with berries/fruit/book for buffs).</yellow>"
+  step2-msg: "<yellow><b>Step 2:</b> Right-click with your payment (or sneak-click empty hand for free gift).</yellow>"
   payload-loaded: "<green>✔ Package loaded: <gold>%item% x%amount%</gold>!</green>"
   payment-set: "<green>✔ Required payment: <gold>%item% x%amount%</gold>.</green>"
   gift-delivery-set: "<green>✔ Free gift delivery (no payment required)!</green>"
