@@ -1,9 +1,9 @@
 name: ParrotCouriers
 version: '1.0.0'
 main: com.parrotcouriers.ParrotCouriersPlugin
-api-version: '26.2'
+api-version: '1.21'
 author: Dxrmy
-description: Tamed Parrot Delivery and Trading System for PaperMC 26.2
+description: Tamed Parrot Delivery and Trading System for PaperMC 1.21 - 26.2
 
 commands:
   courier:

@@ -47,7 +47,7 @@ public class ParrotCouriersPlugin extends JavaPlugin {
         // Start Flight Engine task (runs every tick)
         this.flightEngine.runTaskTimer(this, 1L, 1L);
 
-        getLogger().info("ParrotCouriers v" + getPluginMeta().getVersion() + " enabled on Paper 26.2!");
+        getLogger().info("ParrotCouriers v" + getPluginMeta().getVersion() + " enabled successfully!");
     }
 
     public void reloadPlugin() {
