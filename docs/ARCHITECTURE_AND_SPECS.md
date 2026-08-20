@@ -1,44 +1,38 @@
-# 🏗️ ParrotCouriers — Technical Architecture & Specifications
+# ParrotCouriers Technical Architecture
+
+## 1. 3D Flight Navigation & Collision Handling
+
+- **3D A* Pathfinding (`Pathfinder3D.java`):**
+  - Searches up to 10,000 nodes with a 0.6x0.9x0.6m entity bounding box clearance to avoid 1-block gaps.
+  - Hierarchical sub-goal chaining breaks paths longer than 35 blocks into 30m intermediate waypoints.
+  - Waypoints are cached per courier UUID (`CachedPath`) to avoid per-tick recalculations.
+
+- **Sensory Repulsion Potential Field (`FlightEngine.java`):**
+  - Evaluates 14 probe rays in a hemisphere around the flight velocity vector up to 4 meters away.
+  - Applies an inverse-square repulsive force away from nearby solid blocks to navigate around walls and columns.
+
+- **Collision Slide Guard:**
+  - Performs 1-tick lookahead checks. If an obstacle is ahead, velocity is projected onto the surface tangent plane to prevent block clipping.
+
+- **Stuck Detection & Teleport Fallback:**
+  - If position changes by less than 0.45m over 50 ticks (2.5s), an escape impulse is applied towards the nearest open air space.
+  - If 3 escape attempts fail or the flight time exceeds the calculated ETA timeout, the courier performs an emergency warp to the target location.
 
 ---
 
-## 1. Baritone-Grade 3D Flight & Sensory Physics
+## 2. Chunk Ticket & Entity Lifecycle Management
 
-The courier flight navigation system in [`FlightEngine.java`](file:///C:/Users/kmric/ParrotCouriers/src/main/java/com/parrotcouriers/flight/FlightEngine.java) and [`Pathfinder3D.java`](file:///C:/Users/kmric/ParrotCouriers/src/main/java/com/parrotcouriers/flight/Pathfinder3D.java) is engineered for full 3D terrain navigation:
+- **Dynamic Chunk Tickets:**
+  - While in transit, couriers hold a plugin chunk ticket on their current chunk to keep their flight path ticking.
+  - Chunk tickets are immediately released upon arrival or completion to prevent unused chunks from remaining in memory.
 
-### A. Hierarchical 3D A\* Planner (10,000 Node Depth)
-- **Hitbox Clearance:** Enforces a $0.6 \times 0.9 \times 0.6\text{m}$ collision bounding box to prevent clipping into 1-block crevices or low ceilings.
-- **Hierarchical Sub-Goals:** For distant flights ($>35\text{m}$), journeys are automatically segmented into 30m local air-pocket waypoints, chaining A\* searches with zero tick overhead.
-- **Path Caching:** Waypoint arrays are cached per courier UUID (`CachedPath`) to eliminate per-tick recalculations.
-
-### B. 14-Ray Sensory Repulsion Potential Field
-The entity projects a 3D hemispherical array of 14 probe rays around its velocity vector extending up to 4.0 meters. Any solid block detected exerts an inverse-square repulsion force:
-$$\vec{F}_{\text{repel}} = \sum_{i=1}^{14} \frac{-\hat{r}_i \cdot (4.0 - d_i)}{d_i^2 \times 1.5}$$
-Blending $\vec{F}_{\text{repel}}$ with the target attraction vector creates organic, wall-bending flight curves around Nether fortress pillars, stalactites, and cavern walls.
-
-### C. Predictive Collision Sliding Guard
-Predicts block intersections 1 tick ahead. If an obstacle is detected in front, velocity is projected onto the surface tangent sliding plane, allowing the parrot to skim along walls without sticking or penetrating solid blocks.
-
-### D. Stuck Detection & Escape Impulses
-- Monitored at $\Delta \text{pos} < 0.45\text{m}$ for 50 ticks ($2.5\text{s}$).
-- Triggers an instant escape impulse vector into adjacent open airspace with cloud puff particles.
-- If 3 retries fail or total flight time exceeds maximum ETA, the courier initiates **Emergency Teleport Rescue** straight to the target/perch.
+- **Entity Persistence:**
+  - Couriers are marked `persistent = true`, `invulnerable = true`, and `removeWhenFarAway = false`.
+  - All package states, payment requirements, and original parrot metadata (including variant color and custom name) are stored in both the entity's PersistentDataContainer (PDC) and serialized to `couriers.yml`.
 
 ---
 
-## 2. Active Chunk-Ticket Management & Persistence
+## 3. Trade Interface & Duplication Prevention (`TradeGui.java`)
 
-- **In-Flight Chunk Tickets:** As the courier moves across chunk boundaries, `world.addPluginChunkTicket(chunkX, chunkZ, plugin)` is invoked, ensuring chunks along the flight path remain loaded and ticking until arrival.
-- **Unloaded Chunk Wakeup:** Recalling or finding couriers across unvisited territory dynamically awakens distant chunks (`world.getChunkAt(chunkX, chunkZ)`).
-- **Zero-Loss Data Persistence:**
-  - Couriers are marked `setPersistent(true)`, `setInvulnerable(true)`, and `setRemoveWhenFarAway(false)`.
-  - All inventory stacks (payloads, payments, letters) are serialized into Base64 NBT via `ItemStack.serializeAsBytes()` and written to the entity's PersistentDataContainer (PDC) and `couriers.yml`.
-  - Parrot feather color/variant (`Parrot.Variant`) is preserved across all restarts and recoveries.
-
----
-
-## 3. Anti-Dupe Transaction Engine ([`TradeGui.java`](file:///C:/Users/kmric/ParrotCouriers/src/main/java/com/parrotcouriers/gui/TradeGui.java))
-
-- **Immediate Payload Nullification:** Upon trade confirmation, `courierData.setPayloadItem(null)` is invoked instantaneously before initiating the return flight, permanently preventing item duplication.
-- **Symmetrical 1-Slot Padding:** Clean dark-border GUI layout with package slot (10) and payment/tip slot (16).
-- **Full Inventory Overflow Drop:** Any overflow items that exceed player inventory space are dropped naturally at the recipient's or owner's feet (`world.dropItemNaturally`) with chat feedback.
+- **Payload Clearing:** The payload stack is cleared from the courier data immediately when a trade is accepted (`courierData.setPayloadItem(null)`), preventing items from being collected twice upon return.
+- **Inventory Overflow:** If a player's inventory is full when accepting a delivery or claiming returns, remaining items are dropped naturally at their feet with a chat notification.

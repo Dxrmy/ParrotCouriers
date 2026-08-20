@@ -9,11 +9,8 @@ import org.bukkit.util.Vector;
 import java.util.*;
 
 /**
- * Baritone-Grade 3D A* Pathfinder & Hierarchical Sub-Goal Planner:
- * - Ultra-high search budget (10,000 nodes)
- * - Hierarchical sub-goal chaining for long-range 100-1000m navigation
- * - Full entity hitbox clearance (0.6x0.9x0.6m)
- * - String-pulling path optimization
+ * 3D A* pathfinder supporting hierarchical sub-goal navigation
+ * and collision clearance for flying entities.
  */
 public class Pathfinder3D {
 

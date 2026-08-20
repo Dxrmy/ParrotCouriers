@@ -1,74 +1,74 @@
-# 🦜 ParrotCouriers
+# ParrotCouriers
 
 **Version:** 1.0.0  
 **Target Platform:** PaperMC 26.2 (Java 25)  
 **Author:** Dxrmy  
 
-An advanced PaperMC Minecraft plugin that transforms tamed parrots into autonomous, secure item and letter couriers with Baritone-grade 3D A* flight navigation, obstacle avoidance, customizable mailbox perches, and cross-dimensional travel.
+ParrotCouriers is a PaperMC plugin that lets players use tamed parrots to deliver items, trade packages, and written letters across dimensions.
 
 ---
 
-## ✨ Features
+## Features
 
-- **Autonomous 3D A\* Flight Navigation (10,000 Nodes):** Couriers calculate intelligent 3D flight paths across mountains, caves, and Nether terrain.
-- **14-Ray Sensory Repulsion Potential Field:** Real-time obstacle detection bends flight smoothly around walls, trees, and fortress pillars.
-- **Persistent Chunk-Ticket Flight:** Couriers hold dynamic chunk tickets along their flight corridor to prevent freezing in unloaded chunks.
-- **Special Courier Buffs:**
-  - 🍇 **Sweet Berries:** Grants +85% speed boost with cloud particle trails.
-  - 🌟 **Glow Berries:** Grants nighttime glowing outline.
-  - 🔮 **Chorus Fruit:** Unlocks interdimensional flight across Overworld, Nether, and The End.
-  - 📜 **Books & Notes:** Attach readable delivery letters and custom notes.
-- **Delivery Perch System (Mailboxes):** Register specific blocks as personal perches for automated landing (`/courier perch set` & `/courier perch prioritize`).
-- **Live Action Bar ETA:** Real-time distance and ETA countdowns for both sender and recipient.
-- **Zero-Dupe & Anti-Theft Protection:** Secure transaction GUI with symmetrical padding, immediate payload consumption, and overflow drop safety.
-- **Transaction Ledger:** Track past deliveries and payments with `/courier history`.
-- **Emergency Recovery & Recall:** Stuck detection with escape impulses, automatic timeout teleportation rescue, and instant `/courier recall` with 100% feather color/variant preservation.
+- **3D Flight Navigation:** Couriers use full 3D A* pathfinding and obstacle avoidance to navigate around terrain, trees, caves, and Nether structures.
+- **Chunk Loading:** Chunks along the flight path are kept loaded during transit so long-distance deliveries do not stall in unloaded areas.
+- **Delivery Buffs:**
+  - **Sweet Berries:** Increases flight speed by +85% with cloud particle trails.
+  - **Glow Berries:** Adds a glowing outline for night visibility.
+  - **Chorus Fruit:** Unlocks cross-dimensional travel between the Overworld, Nether, and The End.
+  - **Book & Quill / Written Books:** Attach letters that recipients can read directly from the trade screen.
+- **Delivery Perches:** Set personal perches (`/courier perch set`) so couriers land at a designated mailbox block instead of chasing a moving player.
+- **Live ETA Action Bar:** Shows real-time distance and estimated flight time for both sender and recipient.
+- **Trading GUI:** Symmetrical container interface where recipients can accept deliveries and submit required payments or optional tips.
+- **History Ledger:** View past transactions and delivery logs with `/courier history`.
+- **Recall & Safety:** Stuck detection with escape impulses, arrival timeouts, and `/courier recall` to safely bring couriers and items home.
 
 ---
 
-## 🚀 Quick Start Guide
+## Usage Guide
 
 ### 1. Register a Courier
-1. Tame a parrot using seeds.
-2. Name it with a Name Tag using `@` prefix:
-   - To send to a player: `@PlayerName`
-   - To send to coordinates: `@100 64 -200` (or `@nether -50 70 120`)
+1. Tame a parrot with seeds.
+2. Apply a Name Tag with the `@` prefix:
+   - Target a player: `@PlayerName`
+   - Target coordinates: `@100 64 -200` (or `@nether -50 70 120`)
 
 ### 2. (Optional) Apply Buffs
-- **Sweet Berries:** Sneak right-click to grant speed boost.
-- **Glow Berries:** Sneak right-click to grant night glow.
-- **Chorus Fruit:** Sneak right-click to unlock dimensional travel.
-- **Book & Quill / Written Book:** Right-click with a written book or book & quill to attach a letter.
+- Sneak right-click with **Sweet Berries** for speed boost.
+- Sneak right-click with **Glow Berries** for glowing outline.
+- Sneak right-click with **Chorus Fruit** for interdimensional travel.
+- Right-click with a **Book & Quill** or **Written Book** to attach a letter.
 
-### 3. Load Items & Send
-- **Step 1:** Right-click with the package item to send.
-- **Step 2:** Right-click with the required payment (or sneak-click empty hand for free gift delivery).
-- **Step 3:** The trade locks and the courier takes flight!
+### 3. Load Items & Launch
+- **Step 1:** Right-click the parrot with the item you want to send.
+- **Step 2:** Right-click with the payment item you require (or sneak right-click with an empty hand for a free delivery).
+- The trade locks and the courier takes off.
 
-### 4. Receive Delivery
-- When the courier lands, the recipient sneaks near it to open the trade GUI.
-- The recipient collects the package and provides required payment (or optional tip).
-- The courier flies back to the owner or their registered **Delivery Perch**.
+### 4. Receiving a Delivery
+- When the courier arrives, sneak near it to open the trade interface.
+- Click the letter slot to read any attached book.
+- Deposit the required payment (or an optional tip for free deliveries) and click **Accept Delivery**.
+- The courier will fly back to the owner or their registered perch.
 
 ---
 
-## 💻 Commands
+## Commands
 
 | Command | Permission | Description |
 |---|---|---|
-| `/courier help` | `parrotcouriers.use` | Displays interactive guide and command syntax. |
+| `/courier help` | `parrotcouriers.use` | Shows plugin help and commands. |
 | `/courier list` | `parrotcouriers.use` | Lists all your active couriers and their destinations. |
-| `/courier recall` | `parrotcouriers.recall` | Recalls an active courier or rescues a stranded one. |
-| `/courier claim` | `parrotcouriers.claim` | Opens the Claim GUI for any returned courier. |
-| `/courier history` | `parrotcouriers.history` | Views your personal delivery transaction history. |
-| `/courier perch set` | `parrotcouriers.perch` | Sets your personal Delivery Perch under your feet. |
-| `/courier perch prioritize` | `parrotcouriers.perch` | Toggles prioritizing your perch for landing. |
-| `/courier perch remove` | `parrotcouriers.perch` | Removes your registered Delivery Perch. |
-| `/courier reload` | `parrotcouriers.admin` | Hot-reloads configuration file. |
+| `/courier recall` | `parrotcouriers.recall` | Recalls an active courier back to your side. |
+| `/courier claim` | `parrotcouriers.claim` | Opens the claim interface for any returned courier. |
+| `/courier history` | `parrotcouriers.history` | Shows your recent delivery history. |
+| `/courier perch set` | `parrotcouriers.perch` | Sets your delivery perch at your current block. |
+| `/courier perch prioritize` | `parrotcouriers.perch` | Toggles whether couriers prioritize landing at your perch. |
+| `/courier perch remove` | `parrotcouriers.perch` | Removes your delivery perch. |
+| `/courier reload` | `parrotcouriers.admin` | Reloads `config.yml`. |
 
 ---
 
-## 🔑 Permissions
+## Permissions
 
 ```yaml
 parrotcouriers.use:
@@ -92,13 +92,13 @@ parrotcouriers.claim:
   default: true
 
 parrotcouriers.admin:
-  description: Grants access to reload config and administrative tools
+  description: Grants access to reload config and admin commands
   default: op
 ```
 
 ---
 
-## 🛠️ Building & Compilation
+## Building from Source
 
 Requires **Java 25** and **Maven 3.9+**:
 
@@ -106,4 +106,4 @@ Requires **Java 25** and **Maven 3.9+**:
 mvn clean package
 ```
 
-The compiled plugin JAR will be generated in `target/ParrotCouriers.jar`.
+The compiled JAR will be in `target/ParrotCouriers.jar`.

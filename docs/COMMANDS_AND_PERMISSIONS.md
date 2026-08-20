@@ -1,32 +1,26 @@
-# 📜 ParrotCouriers — Commands & Permissions Reference
+# ParrotCouriers Commands & Permissions
 
----
-
-## 💻 Commands
-
-All subcommands feature dynamic tab completion and permission checks.
+## Commands
 
 | Command | Permission | Description |
 |---|---|---|
-| `/courier help` | `parrotcouriers.use` | Displays interactive quickstart instructions and command syntax. |
-| `/courier list` | `parrotcouriers.use` | Lists all your active couriers, their current states, and targets. |
-| `/courier recall` | `parrotcouriers.recall` | Recalls an in-transit courier or rescues a courier stranded in distant chunks. |
-| `/courier claim` | `parrotcouriers.claim` | Opens the Claim GUI for any returned courier waiting for collection. |
-| `/courier history` | `parrotcouriers.history` | Opens the transaction ledger showing your last 10 completed trades. |
-| `/courier perch set` | `parrotcouriers.perch` | Sets your personal Delivery Perch at the block under your feet. |
-| `/courier perch prioritize` | `parrotcouriers.perch` | Toggles automatic landing prioritization at your perch. |
+| `/courier help` | `parrotcouriers.use` | Displays interactive quickstart help and command reference. |
+| `/courier list` | `parrotcouriers.use` | Lists all active couriers registered by you. |
+| `/courier recall` | `parrotcouriers.recall` | Recalls an en-route courier or rescues a stranded courier. |
+| `/courier claim` | `parrotcouriers.claim` | Opens the claim interface for any returned courier waiting for collection. |
+| `/courier history` | `parrotcouriers.history` | Displays your recent completed deliveries and payments. |
+| `/courier perch set` | `parrotcouriers.perch` | Sets your Delivery Perch at the block under your feet. |
+| `/courier perch prioritize` | `parrotcouriers.perch` | Toggles whether couriers prioritize landing at your perch. |
 | `/courier perch remove` | `parrotcouriers.perch` | Removes your registered Delivery Perch. |
-| `/courier reload` | `parrotcouriers.admin` | Hot-reloads `config.yml` settings without restarting the server. |
+| `/courier reload` | `parrotcouriers.admin` | Reloads `config.yml`. |
 
 ---
 
-## 🔑 Permissions Tree
-
-Permissions are structured for standard survival servers and server admins:
+## Permissions
 
 ```yaml
 parrotcouriers.use:
-  description: Allows registering and sending courier parrots
+  description: Allows player to use parrot couriers
   default: true
 
 parrotcouriers.perch:
@@ -46,6 +40,6 @@ parrotcouriers.claim:
   default: true
 
 parrotcouriers.admin:
-  description: Grants access to reload configuration and manage all couriers
+  description: Grants access to reload configuration and admin tools
   default: op
 ```
