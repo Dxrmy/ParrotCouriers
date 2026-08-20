@@ -1,20 +1,20 @@
 # ParrotCouriers
 
-Transform tamed parrots into autonomous, postal couriers capable of delivering items, trade packages, and written letters across the Overworld, Nether, and The End.
+Transform tamed parrots into autonomous postal couriers capable of delivering items, trade packages, and written letters across the Overworld, Nether, and The End.
 
 Couriers calculate 3D flight paths around terrain, caves, and structures, keep transit chunks loaded during long-distance flights, and provide a secure container trading interface for safe deliveries.
 
 ---
 
-## ✨ Features
+## Features
 
 - **3D Flight Pathfinding**: Couriers navigate around mountains, trees, caverns, and Nether fortress structures using 3D path planning and sensory obstacle avoidance.
 - **Dynamic Chunk Loading**: Automatically keeps chunks loaded along the flight path so couriers never freeze or get lost in unloaded territory.
 - **Courier Buffs**:
-  - 🍇 **Sweet Berries**: +85% speed boost with cloud particle trails.
-  - 🌟 **Glow Berries**: Persistent glowing outline for nighttime visibility.
-  - 🔮 **Chorus Fruit**: Unlocks cross-dimensional travel across the Overworld, Nether, and The End.
-  - 📜 **Book & Quill / Written Books**: Attach readable letters that open directly in a book interface on screen.
+  - **Sweet Berries**: +85% speed boost with cloud particle trails.
+  - **Glow Berries**: Persistent glowing outline for nighttime visibility.
+  - **Chorus Fruit**: Unlocks cross-dimensional travel across the Overworld, Nether, and The End.
+  - **Book & Quill / Written Books**: Attach readable letters that open directly in a book interface on screen.
 - **Delivery Perch System**: Set personal landing blocks (`/courier perch set`) so couriers land at a designated mailbox rather than chasing a moving player.
 - **Live Action Bar ETA**: Real-time distance and estimated flight arrival countdowns for both sender and recipient.
 - **Secure Trade Interface**: Symmetrical container GUI where recipients collect packages and submit required payments or optional tips.
@@ -23,34 +23,34 @@ Couriers calculate 3D flight paths around terrain, caves, and structures, keep t
 
 ---
 
-## 🚀 How to Use
+## Usage
 
-### 1. Register a Courier
-1. Tame a parrot with seeds.
-2. Apply a Name Tag with the `@` prefix:
-   - **Send to a player:** `@PlayerName`
-   - **Send to coordinates:** `@100 64 -200` (or `@nether -50 70 120`)
+**1. Registration**
+- Tame a parrot with seeds.
+- Apply a Name Tag with the `@` prefix:
+  - Send to player: `@PlayerName`
+  - Send to coordinates: `@100 64 -200` (or `@nether -50 70 120`)
 
-### 2. Apply Buffs (Optional)
+**2. Optional Buffs**
 - Sneak + right-click with **Sweet Berries** for speed boost.
 - Sneak + right-click with **Glow Berries** for glowing outline.
 - Sneak + right-click with **Chorus Fruit** for interdimensional flight.
 - Right-click with a **Book & Quill** or **Written Book** to attach a readable letter.
 
-### 3. Load Items & Launch
-- **Step 1:** Right-click the parrot with the item stack you want to send.
-- **Step 2:** Right-click with the payment item you require from the recipient (or sneak right-click with an empty hand for a free delivery).
+**3. Sending Items**
+- Right-click the parrot with the item stack you want to send.
+- Right-click with the payment item you require from the recipient (or sneak right-click with an empty hand for a free delivery).
 - The trade locks and the courier takes flight.
 
-### 4. Receiving & Trading
-- When the courier arrives, sneak near it to open the trade interface.
+**4. Receiving & Trading**
+- Sneak near the courier upon arrival to open the trade interface.
 - Click the letter slot to open and read any attached book.
-- Deposit the required payment items (or an optional tip) into the right slot and click **Accept Delivery**.
+- Place the required payment items (or an optional tip) into the payment slot and click **Accept Delivery**.
 - The courier flies back to the sender or their registered delivery perch.
 
 ---
 
-## 📬 Delivery Perches (Mailboxes)
+## Delivery Perches
 
 A Delivery Perch serves as a permanent landing mailbox for incoming and returning couriers:
 - `/courier perch set` — Registers the block under your feet as your active perch.
@@ -59,7 +59,7 @@ A Delivery Perch serves as a permanent landing mailbox for incoming and returnin
 
 ---
 
-## 💻 Commands & Permissions
+## Commands
 
 | Command | Permission | Description |
 |---|---|---|
@@ -70,6 +70,10 @@ A Delivery Perch serves as a permanent landing mailbox for incoming and returnin
 | `/courier history` | `parrotcouriers.history` | Displays your recent delivery transaction logs. |
 | `/courier perch <set\|prioritize\|remove>` | `parrotcouriers.perch` | Manages your personal delivery perch. |
 | `/courier reload` | `parrotcouriers.admin` | Reloads `config.yml`. |
+
+---
+
+## Permissions
 
 ```yaml
 permissions:
@@ -95,9 +99,9 @@ permissions:
 
 ---
 
-## 📦 Compatibility & Requirements
+## Compatibility
 
-- **Server Platform:** Paper / Purpur `1.21` – `26.2+`
+- **Server:** Paper / Purpur `1.21` – `26.2+`
 - **Java:** Java 21+
-- **Dependencies:** **None** (100% standalone, pure Paper API)
+- **Dependencies:** None (100% standalone, pure Paper API)
 - **Clients:** 100% Vanilla compatible (no mods required for players)
