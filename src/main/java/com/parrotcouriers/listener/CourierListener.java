@@ -346,6 +346,20 @@ public class CourierListener implements Listener {
         }
     }
 
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onEntityMount(org.bukkit.event.entity.EntityMountEvent event) {
+        if (event.getEntity() instanceof Parrot parrot && plugin.getCourierManager().isCourier(parrot)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onPlayerLeash(org.bukkit.event.entity.PlayerLeashEntityEvent event) {
+        if (event.getEntity() instanceof Parrot parrot && plugin.getCourierManager().isCourier(parrot)) {
+            event.setCancelled(true);
+        }
+    }
+
     private boolean isTamedBy(Parrot parrot, Player player) {
         return parrot.isTamed() && parrot.getOwner() != null && parrot.getOwner().getUniqueId().equals(player.getUniqueId());
     }

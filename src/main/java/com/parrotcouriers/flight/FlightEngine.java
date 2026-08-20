@@ -132,6 +132,15 @@ public class FlightEngine extends BukkitRunnable {
         }
     }
 
+    public void releaseChunkTicket(UUID courierUuid, World world) {
+        Long current = activeChunkTickets.remove(courierUuid);
+        if (current != null && world != null) {
+            int oldX = (int) (current >> 32);
+            int oldZ = (int) (long) current;
+            world.removePluginChunkTicket(oldX, oldZ, plugin);
+        }
+    }
+
     private void handleTransitToDestination(Parrot parrot, CourierData data, ConfigManager cfg) {
         Location targetLoc = null;
         boolean isPerchTarget = false;
@@ -222,6 +231,7 @@ public class FlightEngine extends BukkitRunnable {
         double distSq = cur.distanceSquared(targetLoc);
         if (distSq <= 2.2 * 2.2) {
             pathCache.remove(data.getCourierUuid());
+            releaseChunkTicket(data.getCourierUuid(), parrot.getWorld());
             data.setState(CourierState.WAITING_FOR_RECIPIENT);
             data.setStuckTicks(0);
             data.setRetryCount(0);
@@ -373,6 +383,7 @@ public class FlightEngine extends BukkitRunnable {
         double distSq = cur.distanceSquared(targetLoc);
         if (distSq <= 2.2 * 2.2) {
             pathCache.remove(data.getCourierUuid());
+            releaseChunkTicket(data.getCourierUuid(), parrot.getWorld());
             data.setState(CourierState.WAITING_FOR_OWNER);
             data.setStuckTicks(0);
             data.setRetryCount(0);
@@ -574,6 +585,12 @@ public class FlightEngine extends BukkitRunnable {
         double baseSpeed = cfg.getFlightSpeed();
         double speed = data.isSpeedBoost() ? baseSpeed * cfg.getSpeedBoostMultiplier() : baseSpeed;
         double horizontalDist = Math.sqrt(Math.pow(targetLoc.getX() - cur.getX(), 2) + Math.pow(targetLoc.getZ() - cur.getZ(), 2));
+
+        // Void floor safety
+        if (world != null && cur.getY() < world.getMinHeight() + 15) {
+            parrot.setVelocity(new Vector(0, 0.40, 0));
+            return;
+        }
 
         // 1. Long-Range Hierarchical Waypoint Management (10,000 node search depth)
         Vector targetWaypoint = targetLoc.toVector();

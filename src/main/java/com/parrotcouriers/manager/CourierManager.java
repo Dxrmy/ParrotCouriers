@@ -273,6 +273,7 @@ public class CourierManager {
             parrot.getPathfinder().stopPathfinding();
             parrot.setVelocity(new Vector(0, 0, 0));
             parrot.setSitting(true);
+            plugin.getFlightEngine().releaseChunkTicket(data.getCourierUuid(), parrot.getWorld());
         }
 
         saveAll();
