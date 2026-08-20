@@ -162,8 +162,8 @@ public class CourierListener implements Listener {
                 return;
             }
 
-            // Attaching a Letter (Written Book / Book and Quill / Paper with custom name)
-            if (courier.getLetterItem() == null && (handItem.getType() == Material.WRITTEN_BOOK || handItem.getType() == Material.WRITABLE_BOOK || (handItem.getType() == Material.PAPER && handItem.hasItemMeta()))) {
+            // Attaching a Letter (Written Book / Book and Quill)
+            if (courier.getLetterItem() == null && (handItem.getType() == Material.WRITTEN_BOOK || handItem.getType() == Material.WRITABLE_BOOK)) {
                 event.setCancelled(true);
                 courier.setLetterItem(handItem.clone());
                 if (handItem.getItemMeta() instanceof BookMeta bookMeta && bookMeta.hasTitle()) {
@@ -174,7 +174,7 @@ public class CourierListener implements Listener {
                 player.getInventory().setItemInMainHand(null);
                 parrot.getWorld().playSound(parrot.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0f, 1.0f);
                 parrot.getWorld().spawnParticle(Particle.ENCHANT, parrot.getLocation().add(0, 0.5, 0), 10, 0.2, 0.2, 0.2, 0.05);
-                TextUtil.sendMessage(player, "<green>✔ Letter attached! The recipient can read your letter upon delivery.</green>");
+                TextUtil.sendMessage(player, "<green>✔ Letter attached! The recipient can click the letter in the trade window to read it.</green>");
                 return;
             }
 

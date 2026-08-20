@@ -37,7 +37,7 @@ Buffs must be applied during the setup phase (before finalizing Step 2):
 | **Sweet Berries** | Sneak + Right-Click | Grants a **+85% speed increase** and displays cloud particle trails. |
 | **Glow Berries** | Sneak + Right-Click | Gives the parrot a **glowing outline** for night flights and cave navigation. |
 | **Chorus Fruit** | Sneak + Right-Click | Unlocks **cross-dimensional flight** (ascends and creates a portal warp between Overworld, Nether, and End). |
-| **Book & Quill / Written Book / Named Paper** | Right-Click | Attaches a delivery letter. The recipient can click the letter slot inside the GUI to read the book or note. |
+| **Book & Quill / Written Book** | Right-Click | Attaches a delivery letter. The recipient can click the letter slot inside the trade GUI to open and read the book directly on screen. |
 
 ---
 

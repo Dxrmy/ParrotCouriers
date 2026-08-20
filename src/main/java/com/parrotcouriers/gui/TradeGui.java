@@ -139,12 +139,31 @@ public class TradeGui implements InventoryHolder {
     public void handleLetterClick() {
         if (courierData.getLetterItem() == null) return;
         ItemStack letter = courierData.getLetterItem();
+        
+        ItemStack viewableBook = null;
         if (letter.getType() == Material.WRITTEN_BOOK) {
-            recipient.openBook(letter);
-        } else if (letter.hasItemMeta() && letter.getItemMeta().hasDisplayName()) {
-            TextUtil.sendMessage(recipient, "<yellow>Note: <gold>" + TextUtil.toPlain(letter.getItemMeta().displayName()) + "</gold></yellow>");
-        } else if (courierData.getDeliveryNote() != null) {
-            TextUtil.sendMessage(recipient, "<yellow>Note: <gold>" + courierData.getDeliveryNote() + "</gold></yellow>");
+            viewableBook = letter.clone();
+        } else if (letter.getType() == Material.WRITABLE_BOOK && letter.getItemMeta() instanceof org.bukkit.inventory.meta.WritableBookMeta writable) {
+            viewableBook = new ItemStack(Material.WRITTEN_BOOK);
+            BookMeta meta = (BookMeta) viewableBook.getItemMeta();
+            if (meta != null) {
+                if (writable.hasPages()) {
+                    meta.setPages(writable.getPages());
+                }
+                meta.title(Component.text(courierData.getDeliveryNote() != null ? courierData.getDeliveryNote() : "Courier Letter"));
+                meta.author(Component.text(courierData.getOwnerName() != null ? courierData.getOwnerName() : "Courier"));
+                viewableBook.setItemMeta(meta);
+            }
+        }
+
+        if (viewableBook != null) {
+            final ItemStack bookToOpen = viewableBook;
+            courierData.setGuiOpen(false);
+            recipient.closeInventory();
+            plugin.getServer().getScheduler().runTask(plugin, () -> {
+                recipient.openBook(bookToOpen);
+                recipient.playSound(recipient.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0f, 1.0f);
+            });
         }
     }
 

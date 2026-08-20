@@ -38,7 +38,7 @@ An advanced PaperMC Minecraft plugin that transforms tamed parrots into autonomo
 - **Sweet Berries:** Sneak right-click to grant speed boost.
 - **Glow Berries:** Sneak right-click to grant night glow.
 - **Chorus Fruit:** Sneak right-click to unlock dimensional travel.
-- **Written Book / Paper:** Right-click with a book/note to attach a letter.
+- **Book & Quill / Written Book:** Right-click with a written book or book & quill to attach a letter.
 
 ### 3. Load Items & Send
 - **Step 1:** Right-click with the package item to send.

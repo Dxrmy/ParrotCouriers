@@ -38,7 +38,7 @@ Couriers navigate complex 3D environments (caves, ravines, Nether fortress corri
 - **Sweet Berries:** Sneak right-click to grant **+85% Flight Speed** and wind trails.
 - **Glow Berries:** Sneak right-click to grant **Night Glowing Outline**.
 - **Chorus Fruit:** Sneak right-click to unlock **Interdimensional Travel** (Nether / End).
-- **Written Book / Paper:** Right-click with a book or named note to attach a readable letter.
+- **Book & Quill / Written Book:** Right-click with a written book or book & quill to attach a readable letter.
 
 ### 3. Load Items & Launch
 - **Step 1:** Right-click with the item/package you want to send.
