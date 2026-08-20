@@ -1,0 +1,38 @@
+name: ParrotCouriers
+version: '1.0.0'
+main: com.parrotcouriers.ParrotCouriersPlugin
+api-version: '26.2'
+author: Dxrmy
+description: Tamed Parrot Delivery and Trading System for PaperMC 26.2
+
+commands:
+  courier:
+    description: Parrot Couriers management and status command
+    aliases: [parrotcourier, couriers]
+    permission: parrotcouriers.use
+    usage: /courier [help|list|recall|claim|history|perch|reload]
+
+permissions:
+  parrotcouriers.use:
+    description: Allows player to use parrot couriers
+    default: true
+    children:
+      parrotcouriers.perch: true
+      parrotcouriers.history: true
+      parrotcouriers.recall: true
+      parrotcouriers.claim: true
+  parrotcouriers.perch:
+    description: Allows player to set and manage their delivery perch
+    default: true
+  parrotcouriers.history:
+    description: Allows player to view their delivery ledger history
+    default: true
+  parrotcouriers.recall:
+    description: Allows player to recall active couriers
+    default: true
+  parrotcouriers.claim:
+    description: Allows player to claim returned courier items
+    default: true
+  parrotcouriers.admin:
+    description: Allows administrative reload and management actions
+    default: op
