@@ -2,8 +2,8 @@ package com.parrotcouriers.util;
 
 import com.parrotcouriers.ParrotCouriersPlugin;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.entity.Player;
 
 /**
@@ -43,10 +43,14 @@ public final class TextUtil {
     }
 
     /**
-     * Convert Component to plain text string.
+     * Convert Component to plain text string safely without optional external serializers.
      */
     public static String toPlain(Component component) {
         if (component == null) return "";
-        return PlainTextComponentSerializer.plainText().serialize(component);
+        if (component instanceof TextComponent textComp && textComp.children().isEmpty()) {
+            return textComp.content();
+        }
+        String serialized = MINI_MESSAGE.serialize(component);
+        return MINI_MESSAGE.stripTags(serialized);
     }
 }
