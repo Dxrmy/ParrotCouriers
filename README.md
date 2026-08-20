@@ -22,8 +22,8 @@ Couriers calculate 3D flight paths around terrain, caves, and structures, keep c
 
 ## Requirements
 
-- **Server**: Paper 26.2+ (or Purpur / compatible forks)
-- **Java**: Java 25+
+- **Server**: Paper / Purpur 1.21 – 26.2+
+- **Java**: Java 21+ (Compatible with Java 21, 22, 23, 24, 25)
 - **Dependencies**: None (100% standalone, no external plugins required)
 
 ## Installation
