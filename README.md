@@ -1,6 +1,6 @@
 # ParrotCouriers
 
-A lightweight, feature-complete PaperMC plugin that transforms tamed parrots into autonomous, postal couriers capable of delivering items, trade packages, and written letters across dimensions.
+A PaperMC plugin that turns tamed parrots into postal couriers that deliver items, trade packages, and written letters across dimensions.
 
 Couriers calculate 3D flight paths around terrain, caves, and structures, keep chunks loaded during long-distance transit, and offer a secure trading interface for package exchanges.
 
