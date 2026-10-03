@@ -215,15 +215,12 @@ public class FlightEngine extends BukkitRunnable {
 
         Location cur = parrot.getLocation();
 
-        // 1. Initialize ETA Timeout on flight start
         initializeFlightTimeout(cur, targetLoc, data, cfg);
 
-        // 2. Stuck Detection & Timeout Teleport Rescue Check
         if (checkStuckAndTimeoutRescue(parrot, cur, targetLoc, data, cfg, true, isPerchTarget)) {
             return;
         }
 
-        // 3. Normal Arrival Check (within 2.2 blocks)
         double distSq = cur.distanceSquared(targetLoc);
         if (distSq <= 2.2 * 2.2) {
             pathCache.remove(data.getCourierUuid());
@@ -265,7 +262,6 @@ public class FlightEngine extends BukkitRunnable {
             return;
         }
 
-        // 4. Live ETA Action Bar updates
         if (cfg.isShowEtaActionBar() && tickCounter % 20 == 0) {
             double horizDist = Math.sqrt(Math.pow(targetLoc.getX() - cur.getX(), 2) + Math.pow(targetLoc.getZ() - cur.getZ(), 2));
             double speed = data.isSpeedBoost() ? cfg.getFlightSpeed() * cfg.getSpeedBoostMultiplier() : cfg.getFlightSpeed();
@@ -285,7 +281,6 @@ public class FlightEngine extends BukkitRunnable {
             }
         }
 
-        // 5. Baritone 3D Flight Navigation
         flyTowardsBaritone(parrot, cur, targetLoc, data, cfg);
     }
 
@@ -367,15 +362,12 @@ public class FlightEngine extends BukkitRunnable {
 
         Location cur = parrot.getLocation();
 
-        // 1. Initialize ETA Timeout on return start
         initializeFlightTimeout(cur, targetLoc, data, cfg);
 
-        // 2. Stuck Detection & Timeout Teleport Rescue Check
         if (checkStuckAndTimeoutRescue(parrot, cur, targetLoc, data, cfg, false, isOwnerPerch)) {
             return;
         }
 
-        // 3. Normal Return Arrival Check (within 2.2 blocks)
         double distSq = cur.distanceSquared(targetLoc);
         if (distSq <= 2.2 * 2.2) {
             pathCache.remove(data.getCourierUuid());
@@ -412,7 +404,6 @@ public class FlightEngine extends BukkitRunnable {
             return;
         }
 
-        // 4. Live ETA Action Bar updates
         if (cfg.isShowEtaActionBar() && tickCounter % 20 == 0) {
             double horizDist = Math.sqrt(Math.pow(targetLoc.getX() - cur.getX(), 2) + Math.pow(targetLoc.getZ() - cur.getZ(), 2));
             double speed = data.isSpeedBoost() ? cfg.getFlightSpeed() * cfg.getSpeedBoostMultiplier() : cfg.getFlightSpeed();
@@ -423,7 +414,6 @@ public class FlightEngine extends BukkitRunnable {
             }
         }
 
-        // 5. Baritone 3D Flight Navigation
         flyTowardsBaritone(parrot, cur, targetLoc, data, cfg);
     }
 
@@ -588,7 +578,6 @@ public class FlightEngine extends BukkitRunnable {
             return;
         }
 
-        // 1. Long-Range Hierarchical Waypoint Management (10,000 node search depth)
         Vector targetWaypoint = targetLoc.toVector();
         boolean isDirectClear = Pathfinder3D.isLineOfSightClear(world, cur, targetLoc);
 
@@ -607,7 +596,6 @@ public class FlightEngine extends BukkitRunnable {
             pathCache.remove(data.getCourierUuid());
         }
 
-        // 2. Compute Target Attraction Vector
         Vector toWaypoint = targetWaypoint.clone().subtract(cur.toVector());
         Vector desiredVelocity;
 
@@ -642,7 +630,6 @@ public class FlightEngine extends BukkitRunnable {
             }
         }
 
-        // 3. Real-Time 3D Sensory Obstacle Repulsion (Hemisphere probe field)
         Vector repulsionForce = computeSensoryRepulsion(world, cur, desiredVelocity);
         Vector blendedVelocity = desiredVelocity.clone().add(repulsionForce);
         if (blendedVelocity.lengthSquared() > 0.001) {
@@ -651,19 +638,16 @@ public class FlightEngine extends BukkitRunnable {
             blendedVelocity = desiredVelocity;
         }
 
-        // 4. Collision Slide Guard
         Vector finalVelocity = applyCollisionSlideGuard(world, cur, blendedVelocity);
 
         parrot.setVelocity(finalVelocity);
 
-        // 5. Heading & Pitch Alignment
         if (finalVelocity.lengthSquared() > 0.005) {
             float yaw = (float) Math.toDegrees(Math.atan2(-finalVelocity.getX(), finalVelocity.getZ()));
             float pitch = (float) Math.toDegrees(-Math.atan2(finalVelocity.getY(), Math.sqrt(finalVelocity.getX() * finalVelocity.getX() + finalVelocity.getZ() * finalVelocity.getZ())));
             parrot.setRotation(yaw, pitch);
         }
 
-        // 6. Visual Particles
         if (cfg.getTrailParticleCount() > 0) {
             Particle trail = data.isGlowing() ? Particle.WAX_OFF : cfg.getTrailParticle();
             parrot.getWorld().spawnParticle(trail, parrot.getLocation().add(0, 0.2, 0), cfg.getTrailParticleCount(), 0.05, 0.05, 0.05, 0.01);
